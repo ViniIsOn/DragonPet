@@ -31,9 +31,9 @@ O manifesto inclui `INTERNET` (requisito do WebView local), `POST_NOTIFICATIONS`
 
 O código do plugin foi verificado estaticamente: agenda alarmes nativos e tenta reagendá-los após a inicialização. O Android e as otimizações de bateria do fabricante podem atrasar ou suprimir entregas.
 
-**A entrega real ainda não foi testada no Moto G24 Power.** Depois de instalar e abrir o app:
+**A entrega real ainda não foi testada no Moto G24 Power.** Após a eclosão, o jogo mostra uma solicitação opcional uma vez; em um save já existente com o dragão, ela aparece ao abrir esta versão. Toque em **Ativar lembretes** para abrir o pedido de permissão do Android, ou **Agora não** para recusar sem penalidade. Se ativar, o padrão é diário às 09:00; ajuste em **Configurações → Lembretes do dragão**.
 
-1. Vá a **Configurações → Lembretes do dragão**, ative os lembretes e conceda a permissão quando solicitada.
+1. Confirme em **Configurações → Lembretes do dragão** que a permissão foi concedida e há alarmes agendados.
 2. Toque em **Testar notificação em 10 s** e, em seguida, mude para outro app ou remova o DragonPet da lista de recentes. Não use **Forçar parada** para esse teste.
 3. Se não chegar, confira as permissões de notificação e bateria do DragonPet nas configurações do Android. Não é necessário desativar o antivírus.
 

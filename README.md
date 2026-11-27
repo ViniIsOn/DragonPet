@@ -58,7 +58,7 @@ Salvamento é automático após cada ação e ao abrir o jogo. O tempo passado e
 - Dia de cuidado e sequência gentil, sem punição por falta.
 - Livro de dragões com o primeiro amigo descoberto e outros "em breve".
 - Música suave e efeitos **gerados por código** (Web Audio), com volumes separados e silenciar.
-- Lembretes locais opcionais: até 3 horários, frequência diária/segunda a sexta/a cada 6-12-24 h, silêncio durante partidas e desligamento total (detalhes abaixo).
+- Lembretes locais opcionais: após a eclosão, o jogo apresenta uma solicitação única para permitir notificações; só ativa após o usuário aceitar. Até 3 horários, frequência diária/segunda a sexta/a cada 6-12-24 h, silêncio durante partidas e desligamento total (detalhes abaixo).
 - Salvamento local e interface responsiva para PC e celular.
 - Ícone Android original do Dragão Esmeralda em variantes adaptativas e densidades mdpi a xxxhdpi.
 

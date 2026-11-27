@@ -160,9 +160,45 @@ function showNameModal(): void {
         bubble(pick(LINES.hatch));
         particles('✨', 8);
         closeModal();
+        window.setTimeout(showReminderOptIn, 250);
       });
       input.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') query<HTMLButtonElement>(modal, '#confirm-name').click();
+      });
+    },
+  );
+}
+
+function showReminderOptIn(): void {
+  if (save.settings.notificationPromptSeen || save.settings.remindersEnabled) return;
+  commit({ ...save, settings: { ...save.settings, notificationPromptSeen: true } });
+  openModal(
+    `<h2>Quer receber lembretes?</h2>
+     <p class="modal-text">O ${save.dragonName || 'seu dragão'} pode mandar um lembrete local para você voltar a cuidar dele. É opcional e você pode desligar quando quiser.</p>
+     <p class="modal-text small">Se ativar, o Android vai pedir permissão. A programação inicial é diária às 09:00; você pode escolher outros horários em Configurações.</p>
+     <p class="modal-text small" id="opt-in-status">Nenhuma notificação será enviada sem sua permissão.</p>
+     <div class="modal-actions">
+       <button id="enable-reminders" class="primary" type="button">Ativar lembretes</button>
+       <button id="skip-reminders" class="ghost" type="button">Agora não</button>
+     </div>`,
+    (modal) => {
+      query<HTMLButtonElement>(modal, '#enable-reminders').addEventListener('click', async (event) => {
+        const button = event.currentTarget as HTMLButtonElement;
+        const status = query(modal, '#opt-in-status');
+        button.disabled = true;
+        status.textContent = 'Solicitando permissão…';
+        const enabled = await updateSettings({ remindersEnabled: true });
+        if (enabled) {
+          closeModal();
+          bubble('Lembretes ativos. Você pode ajustar os horários em Configurações.');
+        } else {
+          button.disabled = false;
+          status.textContent = 'Não foi possível ativar. Confira a permissão de notificações nas configurações do Android.';
+        }
+      });
+      query<HTMLButtonElement>(modal, '#skip-reminders').addEventListener('click', () => {
+        closeModal();
+        bubble('Tudo bem — você pode ativar lembretes depois em Configurações.');
       });
     },
   );
@@ -259,8 +295,18 @@ async function syncNativeNotifications(): Promise<void> {
   if (result.status === 'permissão negada') bubble('Preciso da permissão de notificações para te lembrar.');
 }
 
-async function updateSettings(changes: Partial<Settings>): Promise<void> {
+async function updateSettings(changes: Partial<Settings>): Promise<boolean> {
   const next: GameSave = { ...save, settings: { ...save.settings, ...changes } };
+  if (changes.remindersEnabled === true && next.settings.remindersEnabled) {
+    const permission = await requestNotificationPermission();
+    if (permission !== 'granted') {
+      bubble(permission === 'denied'
+        ? 'A permissão foi negada. Você pode ativá-la nas configurações do Android.'
+        : 'Não foi possível solicitar a permissão neste dispositivo.');
+      return false;
+    }
+    next.settings.notificationPromptSeen = true;
+  }
   commit(next);
   audio.applySettings(next.settings);
   restartReminderWatcher();
@@ -272,7 +318,7 @@ async function updateSettings(changes: Partial<Settings>): Promise<void> {
   ) {
     await syncNativeNotifications();
   }
-  if (changes.remindersEnabled === true && next.settings.remindersEnabled) await requestNotificationPermission();
+  return true;
 }
 
 async function setPlayMode(active: boolean): Promise<void> {
@@ -390,10 +436,16 @@ function showSettings(): void {
         });
       });
       query<HTMLInputElement>(modal, '#reminders').addEventListener('change', async (event) => {
-        const enabled = (event.target as HTMLInputElement).checked;
-        status.textContent = enabled ? 'Agendando…' : 'Desligando…';
-        await updateSettings({ remindersEnabled: enabled });
-        status.textContent = enabled ? 'Lembretes ativos.' : 'Lembretes desligados; nenhum alarme fica pendente.';
+        const checkbox = event.target as HTMLInputElement;
+        const enabled = checkbox.checked;
+        status.textContent = enabled ? 'Solicitando permissão e agendando…' : 'Desligando…';
+        const updated = await updateSettings({ remindersEnabled: enabled });
+        checkbox.checked = save.settings.remindersEnabled;
+        status.textContent = updated
+          ? enabled
+            ? 'Lembretes ativos.'
+            : 'Lembretes desligados; nenhum alarme fica pendente.'
+          : 'Lembretes continuam desligados porque a permissão não foi concedida.';
       });
       query<HTMLButtonElement>(modal, '#test-message').addEventListener('click', () => bubble(pick(LINES.reminder)));
       query<HTMLButtonElement>(modal, '#test-native').addEventListener('click', async () => {
@@ -484,6 +536,9 @@ async function init(): Promise<void> {
   });
 
   if (save.phase === 'egg' && save.warmth >= 100) doHatch();
+  else if (save.phase === 'dragon' && !save.settings.notificationPromptSeen && !save.settings.remindersEnabled) {
+    window.setTimeout(showReminderOptIn, 500);
+  }
 }
 
 function cuddleAction(): void {

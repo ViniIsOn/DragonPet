@@ -37,6 +37,7 @@ export function createNewSave(now = Date.now()): GameSave {
       sfxVolume: 0.7,
       muted: false,
       remindersEnabled: false,
+      notificationPromptSeen: false,
       reminderTimes: ['09:00'],
       reminderFrequency: 'daily',
       reminderIntervalHours: 12,

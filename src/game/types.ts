@@ -16,6 +16,8 @@ export interface Settings {
   sfxVolume: number;
   muted: boolean;
   remindersEnabled: boolean;
+  /** Whether the one-time post-hatch reminder opt-in has been shown. */
+  notificationPromptSeen: boolean;
   reminderTimes: string[];
   reminderFrequency: ReminderFrequency;
   reminderIntervalHours: number;

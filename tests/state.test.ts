@@ -23,6 +23,8 @@ test('novo jogo começa com ovo e recursos iniciais', () => {
   assert.equal(save.warmth, 0);
   assert.equal(save.fruits, 3);
   assert.equal(save.dragonName, '');
+  assert.equal(save.settings.remindersEnabled, false, 'lembretes são sempre opcionais');
+  assert.equal(save.settings.notificationPromptSeen, false, 'a solicitação aparece uma vez após a eclosão');
 });
 
 test('a fome cresce com o tempo, mas é limitada a 12 horas', () => {
