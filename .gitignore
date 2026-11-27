@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.venv/
+android/
+*.local
+.DS_Store
+Unselected files/
+*.log

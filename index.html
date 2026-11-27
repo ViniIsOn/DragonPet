@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff6e6" />
+    <meta name="description" content="DragonPet: cuide de um dragão fofo em uma ilha acolhedora." />
+    <title>DragonPet · Ilha do Amanhecer</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="hud">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>DragonPet<small>Ilha do Amanhecer</small></span>
+        </div>
+        <div class="hud-right">
+          <div class="chip" title="Frutas para alimentar seu dragão"><span aria-hidden="true">🍊</span><span id="fruit-count">0</span></div>
+          <div class="chip" title="Brilhos para melhorar o habitat"><span aria-hidden="true">✨</span><span id="sparkle-count">0</span></div>
+          <button id="catalog-btn" class="icon-btn" type="button" aria-label="Ver dragões">📖</button>
+          <button id="settings-btn" class="icon-btn" type="button" aria-label="Abrir configurações">⚙️</button>
+        </div>
+      </header>
+
+      <main class="stage" id="stage">
+        <img class="island" src="./art/island.webp" alt="Ilha com casa, pomar e lago" draggable="false" />
+        <div class="habitat-decor" id="habitat-decor" aria-hidden="true">
+          <span class="lantern lantern-a">✦</span>
+          <span class="lantern lantern-b">✦</span>
+          <span class="tent" id="habitat-tent"></span>
+        </div>
+
+        <section class="egg-scene" id="egg-scene" aria-label="Ovo aquecendo">
+          <p class="scene-title">Um ovo chegou à ilha</p>
+          <button id="egg" class="egg" type="button" aria-label="Aquecer o ovo"><span class="egg-shine"></span></button>
+          <p class="hint">Toque no ovo para aquecê-lo</p>
+          <div class="progress"><div class="progress-fill" id="egg-progress"></div></div>
+          <p class="progress-label" id="egg-label">0% aquecido</p>
+        </section>
+
+        <div class="bubble" id="bubble" hidden></div>
+
+        <section class="dragon-scene" id="dragon-scene" hidden aria-label="Seu dragão">
+          <button id="dragon-button" class="dragon-button" type="button" aria-label="Fazer carinho no dragão">
+            <img id="dragon" src="./art/dragon-happy.webp" alt="Dragão esmeralda com asas detalhadas" draggable="false" />
+          </button>
+          <p class="dragon-name" id="dragon-name">Dragão</p>
+          <p class="dragon-mood" id="dragon-mood">Feliz</p>
+        </section>
+        <div class="particles" id="particles" aria-hidden="true"></div>
+      </main>
+
+      <section class="care-bar" aria-label="Cuidados">
+        <div class="stats" id="stats">
+          <div class="stat" data-stat="fullness"><span class="stat-icon">🍊</span><div class="stat-body"><span class="stat-name">Saciedade</span><div class="stat-track"><div class="stat-fill"></div></div></div></div>
+          <div class="stat" data-stat="energy"><span class="stat-icon">🌙</span><div class="stat-body"><span class="stat-name">Energia</span><div class="stat-track"><div class="stat-fill"></div></div></div></div>
+          <div class="stat" data-stat="joy"><span class="stat-icon">🎈</span><div class="stat-body"><span class="stat-name">Alegria</span><div class="stat-track"><div class="stat-fill"></div></div></div></div>
+          <div class="stat" data-stat="affection"><span class="stat-icon">💛</span><div class="stat-body"><span class="stat-name">Carinho</span><div class="stat-track"><div class="stat-fill"></div></div></div></div>
+        </div>
+        <div class="actions">
+          <button class="action" id="feed-btn" type="button" disabled><span aria-hidden="true">🍊</span><span>Alimentar</span></button>
+          <button class="action" id="play-btn" type="button" disabled><span aria-hidden="true">🎈</span><span>Brincar</span></button>
+          <button class="action" id="cuddle-btn" type="button" disabled><span aria-hidden="true">💛</span><span>Carinho</span></button>
+          <button class="action" id="sleep-btn" type="button" disabled><span aria-hidden="true">🌙</span><span>Dormir</span></button>
+          <button class="action" id="habitat-btn" type="button"><span aria-hidden="true">🏡</span><span>Habitat</span></button>
+        </div>
+        <div class="footer-note"><span id="day-label">Dia 1 · Filhote</span><span id="save-label">Progresso salvo neste dispositivo</span></div>
+      </section>
+    </div>
+
+    <div id="modal-root" class="modal-root" hidden></div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
