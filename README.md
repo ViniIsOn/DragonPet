@@ -64,7 +64,7 @@ Salvamento é automático após cada ação e ao abrir o jogo. O tempo passado e
 
 ## O que ainda NÃO está pronto
 
-- **APK com o novo ícone:** será gerado pelo workflow após integrar os recursos do ícone; o build anterior foi feito sem ele. O workflow é manual e publica um artefato debug temporário, sem release pública. Veja [docs/ANDROID.md](docs/ANDROID.md).
+- **APK com o novo ícone:** compilado com sucesso no GitHub Actions; o artefato debug temporário exige login no GitHub para baixar. Nenhuma release pública foi criada. Veja [docs/ANDROID.md](docs/ANDROID.md).
 - **Notificações com o app fechado:** o agendamento nativo está implementado e foi conferido no código do plugin (usa `AlarmManager` do Android), mas **a entrega real ainda não foi testada no seu Moto G24 Power** — não tenho aparelho/emulador aqui. Há um teste de 10 segundos dentro de Configurações para você validar. No navegador, o lembrete só funciona com a página aberta.
 - Segundo dragão, crescimento de estágio (jovem/adulto), habitats adicionais, mais minijogos, batalhas amigáveis e sincronização entre dispositivos — próximas etapas.
 - Não há contas, nuvem, anúncios, compras nem coleta de dados.
