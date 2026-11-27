@@ -9,7 +9,7 @@ Nenhum personagem, imagem, som, nome ou outro recurso foi copiado de Dragon Mani
 **Web (HTML + CSS + TypeScript + Vite) empacotada com Capacitor para Android.**
 
 - **PC (Dell XPS L502X, Windows 10, 8 GB, Intel HD Graphics 3000):** o jogo usa DOM/CSS e apenas um canvas 2D simples no minijogo. Não há WebGL, motores 3D, sombras em tempo real nem filtros pesados. As artes foram convertidas para WebP (cerca de 70 KB por pose e 196 KB pela ilha). A NVIDIA continua sem uso — nada aqui depende dela.
-- **Android (POCO M5s):** o mesmo código roda dentro do WebView via Capacitor, com plugins nativos apenas para notificações locais e salvamento. O alvo é um APK debug leve e de rápida instalação.
+- **Android (Moto G24 Power):** o mesmo código roda dentro do WebView via Capacitor, com plugins nativos apenas para notificações locais e salvamento. O projeto inclui ícone adaptativo Android original do Dragão Esmeralda e mipmaps para várias densidades.
 - **Um só código:** o que melhora no PC melhora no celular, sem manter dois jogos separados.
 
 Para jogar no PC você só precisa de um navegador moderno (Chrome, Edge ou Firefox). Para gerar o APK é preciso Node.js no computador e Android SDK no GitHub Actions.
@@ -60,11 +60,12 @@ Salvamento é automático após cada ação e ao abrir o jogo. O tempo passado e
 - Música suave e efeitos **gerados por código** (Web Audio), com volumes separados e silenciar.
 - Lembretes locais opcionais: até 3 horários, frequência diária/segunda a sexta/a cada 6-12-24 h, silêncio durante partidas e desligamento total (detalhes abaixo).
 - Salvamento local e interface responsiva para PC e celular.
+- Ícone Android original do Dragão Esmeralda em variantes adaptativas e densidades mdpi a xxxhdpi.
 
 ## O que ainda NÃO está pronto
 
-- **APK:** nenhum APK foi gerado neste ambiente (não há Java nem SDK Android aqui). O fluxo [build-apk.yml](.github/workflows/build-apk.yml) está pronto para gerar um build debug; veja [docs/ANDROID.md](docs/ANDROID.md). Não há link de download até o fluxo rodar.
-- **Notificações com o app fechado:** o agendamento nativo está implementado e foi conferido no código do plugin (usa `AlarmManager` do Android), mas **não foi testado no seu POCO M5s** — não tenho aparelho/emulador aqui. Há um teste de 10 segundos dentro de Configurações para você validar. No navegador, o lembrete só funciona com a página aberta.
+- **APK com o novo ícone:** será gerado pelo workflow após integrar os recursos do ícone; o build anterior foi feito sem ele. O workflow é manual e publica um artefato debug temporário, sem release pública. Veja [docs/ANDROID.md](docs/ANDROID.md).
+- **Notificações com o app fechado:** o agendamento nativo está implementado e foi conferido no código do plugin (usa `AlarmManager` do Android), mas **a entrega real ainda não foi testada no seu Moto G24 Power** — não tenho aparelho/emulador aqui. Há um teste de 10 segundos dentro de Configurações para você validar. No navegador, o lembrete só funciona com a página aberta.
 - Segundo dragão, crescimento de estágio (jovem/adulto), habitats adicionais, mais minijogos, batalhas amigáveis e sincronização entre dispositivos — próximas etapas.
 - Não há contas, nuvem, anúncios, compras nem coleta de dados.
 
@@ -90,6 +91,8 @@ public/art/           artes otimizadas usadas em jogo
 assets/art/           artes originais geradas para o projeto
 assets/source/        referências em alta qualidade
 scripts/prepare_art.py  converte as artes para WebP com fundo transparente
+scripts/prepare_android_icon.py  gera ícones Android nas densidades necessárias
+android-res/            recursos versionados de ícone (projeto android/ é gerado)
 tests/                testes da lógica de cuidados
 docs/ANDROID.md       guia de APK e permissões
 .github/workflows/    geração do APK sob demanda

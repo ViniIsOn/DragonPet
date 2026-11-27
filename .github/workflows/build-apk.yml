@@ -47,6 +47,9 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
+      - name: Install DragonPet launcher icons
+        run: cp -R android-res/. android/app/src/main/res/
+
       - name: Build debug APK
         run: |
           chmod +x android/gradlew

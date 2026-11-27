@@ -7,6 +7,7 @@ Todas as imagens em `assets/art/` e `public/art/` foram **criadas para este proj
 - `dragon-base-v2.png` — referência original do **Dragão Esmeralda**: corpo esguio, escamas em camadas, chifres de cobre, asas grandes com nervuras, cauda longa e olhos âmbar. A imagem de captura de tela enviada pelo usuário serviu apenas como referência geral de clima/luz de jogo de fantasia estilizada; nenhum personagem, desenho ou composição foi copiado.
 - `dragon-v2-happy.png`, `dragon-v2-hungry.png`, `dragon-v2-sleepy.png`, `dragon-v2-affection.png`, `dragon-v2-playing.png`, `dragon-v2-sleeping.png` — variações geradas a partir dessa referência, mantendo proporções, cores e detalhes.
 - `island-base.png` — ilha original com casa, pomar e lago.
+- `dragonpet-icon.png` — ícone original aprovado para o app Android, usando o mesmo Dragão Esmeralda com rosto em destaque e fundo verde-azulado.
 
 A primeira proposta de dragão (mais arredondada e infantil) foi descartada a pedido do usuário e não faz mais parte do jogo.
 
